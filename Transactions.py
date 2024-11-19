@@ -51,11 +51,11 @@ def main():
     is_initial_income = input("Is the initial balance an income? (y/n) ").lower() == 'y'
     
     # Restrict currency options
-    valid_currencies = ['FRW', 'Naira', 'USD', 'EUR']
-    currency = input("Enter the currency (FRW, Naira, USD, EUR): ")
+    valid_currencies = ['FRW', 'NAIRA', 'USD', 'EUR']
+    currency = input("Enter the currency (FRW, Naira, USD, EUR): ").upper()
     while currency not in valid_currencies:
         print("Invalid currency. Please enter one of the following: FRW, Naira, USD, EUR.")
-        currency = input("Enter the currency (FRW, Naira, USD, EUR): ")
+        currency = input("Enter the currency (FRW, Naira, USD, EUR): ").upper()
     
     budget_tracker = BudgetTracker(initial_balance, is_initial_income, currency, user_name)
 
@@ -71,4 +71,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
