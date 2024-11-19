@@ -49,7 +49,14 @@ def main():
     user_name = input("What is your name? ")
     initial_balance = float(input("Enter the initial balance: "))
     is_initial_income = input("Is the initial balance an income? (y/n) ").lower() == 'y'
-    currency = input("Enter the currency (e.g., USD, EUR, etc.): ")
+    
+    # Restrict currency options
+    valid_currencies = ['FRW', 'Naira', 'USD', 'EUR']
+    currency = input("Enter the currency (FRW, Naira, USD, EUR): ")
+    while currency not in valid_currencies:
+        print("Invalid currency. Please enter one of the following: FRW, Naira, USD, EUR.")
+        currency = input("Enter the currency (FRW, Naira, USD, EUR): ")
+    
     budget_tracker = BudgetTracker(initial_balance, is_initial_income, currency, user_name)
 
     while True:
@@ -64,3 +71,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
