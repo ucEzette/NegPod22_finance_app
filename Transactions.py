@@ -1,3 +1,5 @@
+import re
+
 class Transaction:
     def __init__(self, amount, is_income):
         self.amount = amount
@@ -47,6 +49,10 @@ class BudgetTracker:
 
 def main():
     user_name = input("What is your name? ")
+    while not user_name.isalpha():
+        print("Name should contain only letters. Please try again.")
+        user_name = input("What is your name? ")
+
     initial_balance = float(input("Enter the initial balance: "))
     is_initial_income = input("Is the initial balance an income? (y/n) ").lower() == 'y'
     
