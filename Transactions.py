@@ -87,3 +87,9 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+            budget_tracker.display_transactions()
+            break
+
+if __name__ == "__main__":
+    main()
