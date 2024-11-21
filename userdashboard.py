@@ -17,6 +17,13 @@ class Dashboard:
         return False
 
     def add_transaction(self, amount, description):
+        if not isinstance(amount, (int, float)) or amount <= 0:
+            print("Invalid transaction amount. Please provide a positive number.")
+            return
+        if not description:
+            print("Transaction description cannot be empty.")
+            return
+
         self.transactions.append({
             'amount': amount, 
             'description': description
@@ -26,7 +33,14 @@ class Dashboard:
     def update_dashboard(self):
         self.current_balance = sum(t['amount'] for t in self.transactions)
         print(f"Current Balance: ${self.current_balance:,.2f}")
-        
-         
+    
+    def view_transactions(self):
+        if not self.transactions:
+            print("No transactions available.")
+            return
+        print("\nTransaction History:")
+        for i, transaction in enumerate(self.transactions, 1):
+            print(f"{i}. {transaction['description']} - ${transaction['amount']:,.2f}")
 
- 
+
+     
