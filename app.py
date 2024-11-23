@@ -1,7 +1,7 @@
 def user_dashboard(user, budget_tracker):
-    from budgets import set_budget_goals, capture_expenses
-    from reports import generate_report
-    from transactions import Transaction
+    from Budget_managment import set_budget_goals, capture_expenses
+    from report import generate_report
+    from Transactions import Transaction
 
     budget_goals = None
     expenses = None
