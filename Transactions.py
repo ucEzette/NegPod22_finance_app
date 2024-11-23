@@ -1,5 +1,3 @@
-import re
-
 class Transaction:
     def __init__(self, amount, is_income):
         # Initialize a transaction with amount and type (income or expense)
@@ -82,12 +80,6 @@ def main():
         more_transactions = input("Do you want to enter more transactions? (y/n) ").lower()
         if more_transactions != 'y':
             # Display all transactions and summary before exiting
-            budget_tracker.display_transactions()
-            break
-
-if __name__ == "__main__":
-    main()
-
             budget_tracker.display_transactions()
             break
 
