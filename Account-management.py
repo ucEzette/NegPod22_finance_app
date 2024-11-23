@@ -1,4 +1,4 @@
-import re
+import re  # Importing the regex module
 
 class User:
     def __init__(self, name, email, username, password):
@@ -12,6 +12,8 @@ class User:
 
 class AccountManager:
     def __init__(self):
+        # This list will store existing users for account recovery
+        self.users = []
         # This list will store previously used passwords to check for uniqueness
         self.existing_passwords = []
 
@@ -43,6 +45,17 @@ class AccountManager:
             self.existing_passwords.append(password)
             return True
 
+    def check_existing_account(self, email, username):
+        # Check if an account with the same email or username already exists
+        for user in self.users:
+            if user.email == email:
+                print("An account with this email already exists. Account recovery will be initiated.")
+                return user  # Return the existing user object for account recovery
+            elif user.username == username:
+                print("An account with this username already exists. Account recovery will be initiated.")
+                return user  # Return the existing user object for account recovery
+        return None
+
     def create_account(self):
         print("Welcome to our app! Please create your account.")
         
@@ -62,25 +75,31 @@ class AccountManager:
             else:
                 print("Username cannot be empty.")
         
+        # Check if email or username already exists
+        existing_user = self.check_existing_account(email, username)
+        if existing_user:
+            return existing_user  # Return the existing user for account recovery
+
         # Get a valid password with uniqueness check
         while True:
             password = input("Create a password: ")
             if self.validate_password(password) and self.check_password_uniqueness(password):
                 break
         
-        # Create a User object
+        # Create a new User object
         new_user = User(name, email, username, password)
+        self.users.append(new_user)  # Store the new user in the users list
         print(f"Account created successfully! Welcome, {new_user.name}.")
         
-        # Return the user object for future use (e.g., storing in a database)
+        # Return the new user object
         return new_user
 
 def main():
     account_manager = AccountManager()
 
-    # Create the account
+    # Create or recover account
     user = account_manager.create_account()
-    print(user)  # Display user details for confirmation
+    print(f"Account details: {user}")  # Display user details for confirmation
 
 if __name__ == "__main__":
     main()
