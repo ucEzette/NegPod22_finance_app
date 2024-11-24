@@ -36,29 +36,19 @@ def capture_expenses():
     return expenses
 
 
-def quiz_on_expenses(budget_goals):
-    categories = ['Housing', 'Utilities', 'Food', 'Transportation', 'Healthcare', 'Miscellaneous']
-
-    print("\nLet's quiz you on your monthly expenses compared to your budget goals.")
-    for category in categories:
+def quiz_on_expenses(budget_goals, expenses):
+    print("\nComparing your actual expenses to your budget goals:")
+    for category in budget_goals:
+        goal = budget_goals[category]
+        actual = expenses.get(category, 0)
         print(f"\nCategory: {category}")
-        actual_expense = budget_goals.get(category)
-        print(f"Your budget goal: ${actual_expense:.2f}")
+        print(f"Budget Goal: {goal}")
+        print(f"Actual Expense: {actual}")
 
-        while True:
-            try:
-                user_expense = float(input(f"Enter your actual expense for {category}: $"))
-                if user_expense < 0:
-                    print("Please enter a positive amount.")
-                else:
-                    break
-            except ValueError:
-                print("Invalid input. Please enter a number.")
-
-        if user_expense <= actual_expense:
-            print(f"Great job! You are within your budget for {category}.")
+        if actual <= goal:
+            print("Great job! You stayed within budget.")
         else:
-            print(f"You've exceeded your budget for {category}. Try to cut back next month!")
+            print("You've exceeded your budget for this category. Try to cut back next month!")
 
 
 def main():
@@ -71,7 +61,7 @@ def main():
     expenses = capture_expenses()
 
     # Compare the expenses to the budget goals
-    quiz_on_expenses(budget_goals)
+    quiz_on_expenses(budget_goals, expenses)
 
     print("\nThank you for using the Budget Management System! Keep tracking your expenses!")
 
