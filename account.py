@@ -1,5 +1,5 @@
 import re  # Importing the regex module
-
+from welcome_message import welcome_text
 class User:
     def __init__(self, name, email, username, password):
         self.name = name
